@@ -9,16 +9,16 @@ export function createListEntry(label, counter) {
   cb.setAttribute("value", "check" + counter);
 
   cb.onclick = checkHandler;
-  console.log("test");
 
+  let txtNode = document.createElement("span");
   let node = document.createTextNode(label);
   li.appendChild(span);
   span.appendChild(cb);
-  span.appendChild(node);
+  span.appendChild(txtNode);
+  txtNode.appendChild(node);
   list.appendChild(li);
 }
 
 function checkHandler() {
-  console.log("check");
   document.getElementById(this.id).parentElement.classList.toggle("del");
 }

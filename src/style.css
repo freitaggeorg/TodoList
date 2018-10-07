@@ -6,3 +6,12 @@ li {
   text-decoration: line-through;
   color: rgba(0, 0, 0, 0.3);
 }
+
+input + span {
+  -webkit-transition: all 0.3s; /* Safari */
+}
+
+:checked + span {
+  padding-left: 10px;
+  font-size: 0.95em;
+}
