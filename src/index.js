@@ -14,12 +14,22 @@ input.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
     counter++;
+    Storage.listElements.push(input.value);
+    console.log(Storage.listElements);
     createListEntry(input.value, counter);
     input.value = "";
   }
 });
 
-for (let i = 0; i < 5; i++) {
-  createListEntry("Eintrag " + counter, counter);
-  counter++;
+if (typeof Storage !== "undefined") {
+  if (Storage.listElements === undefined) {
+    Storage.listElements = [];
+  } else {
+    for (let i = 0; i < Storage.listElements.length; i++) {
+      createListEntry(Storage.listElements[i], counter);
+      counter++;
+    }
+  }
+} else {
+  // Sorry! No Web Storage support..
 }
