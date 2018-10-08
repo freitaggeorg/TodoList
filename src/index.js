@@ -9,27 +9,24 @@ document.getElementById("app").innerHTML = `
 
 let input = document.getElementById("textinput");
 let counter = 1;
+let entryList = "";
 
 input.addEventListener("keyup", function(event) {
   event.preventDefault();
   if (event.keyCode === 13) {
     counter++;
-    Storage.listElements.push(input.value);
-    console.log(Storage.listElements);
+    entryList.push(input.value);
+    localStorage.listElements = JSON.stringify(entryList);
     createListEntry(input.value, counter);
     input.value = "";
   }
 });
 
-if (typeof Storage !== "undefined") {
-  if (Storage.listElements === undefined) {
-    Storage.listElements = [];
-  } else {
-    for (let i = 0; i < Storage.listElements.length; i++) {
-      createListEntry(Storage.listElements[i], counter);
-      counter++;
-    }
+if (localStorage.listElements === undefined || localStorage.listElements == "") {
+    localStorage.listElements = "[]";
+} 
+entryList = JSON.parse(localStorage.listElements);
+  for (let i = 0; i < entryList.length; i++) {
+    createListEntry(entryList[i], counter);
+    counter++;
   }
-} else {
-  // Sorry! No Web Storage support..
-}
